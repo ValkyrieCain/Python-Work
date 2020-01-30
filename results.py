@@ -5,5 +5,5 @@ total=physics+chemistry+maths
 per=total*100/450
 print("total marks")
 print(total)
-print(truncate("percentage", 0))
-print(per)
+print("percentage")
+print(round(per,2))
