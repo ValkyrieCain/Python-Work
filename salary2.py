@@ -3,7 +3,6 @@ salary=int(input("Please enter your salary "))
 if salary>2000:
 	tax=salary*21/100
 	net=salary-tax
-
 else:
 	tax=salary*15/100
 	net=salary-tax
