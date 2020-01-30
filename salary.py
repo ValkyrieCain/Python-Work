@@ -6,6 +6,6 @@ else:
 	tax=(salary-11000)*20/100
 net=salary-tax
 print("Salary Slip of",name)
-print("Salary=",salary)
-print("Tax=",tax)
-print("Net Salary=",net)
+print("Salary =",salary)
+print("Tax =",tax)
+print("Net Salary =",net)

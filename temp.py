@@ -1,5 +1,5 @@
-temp=int(input("Enter temperature: "))
+temp=int(input("Enter temperature:"))
 if temp>40:
 	print("It's hot.")
-if temp<40:
+else:
 	print("It's cold.")
