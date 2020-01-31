@@ -3,27 +3,27 @@ paid=int(input("Amount paid: "))
 change=paid-bill
 if change>=50:
 	fifty=int(change/50)
-	change=change-(fifty*50)
+	change=change%50
 else:
 	fifty=0
 if change>=20:
 	twenty=int(change/20)
-	change=change-(twenty*20)
+	change=change%20
 else:
 	twenty=0
 if change>=10:
 	ten=int(change/10)
-	change=change-(ten*10)
+	change=change%10
 else:
 	ten=0
 if change>=5:
 	five=int(change/5)
-	change=change-(five*5)
+	change=change%5
 else:
 	five=0
 if change>=2:
 	two=int(change/2)
-	change=change-(two*2)
+	change=change%2
 else:
 	two=0
 if change>=1:
