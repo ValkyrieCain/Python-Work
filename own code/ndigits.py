@@ -1,9 +1,14 @@
-no=int(input("n digits "))
-def digits():
-	import math
-	digits=int(math.log10(no))+1
-digits()
+no=input("n digits ")
 d1z="1"
+for n in no:
+	d1z=d1z+"0"
+d1=int(int(no)/int(d1z))
+digits()
+digitslist=[1]
+while digits!=1:
+	digitslist.append(digitslist[-1]+1)
+	digits=digits-1
+d1z="1"+"0"
 while digits!=1:
 	d1z=(d1z+"0")
 	digits=digits-1
