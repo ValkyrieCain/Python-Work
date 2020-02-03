@@ -30,4 +30,14 @@ if (one/two)==answer:
 else:
 	print("That's not correct.")
 time.sleep(1)
+print("And finally subtraction.")
+one=int(input("First number to subtract from: "))
+two=int(input("Second number to subtract: "))
+answer=int(input("What's the answer? "))
+if (one-two)==answer:
+	print("You got it right!")
+	points+=1
+else:
+	print("That's not correct.")
+time.sleep(0.5)
 print("You got",points,"correct.")
