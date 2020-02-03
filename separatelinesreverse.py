@@ -10,7 +10,7 @@ while char1>0:
 			word=word+msg[char2]
 			char2+=1
 		print(word)
-		word=""	
+		word=""
 	char1-=1
 char1=0
 while msg[char1]!=" ":
