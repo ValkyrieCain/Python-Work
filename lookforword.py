@@ -18,4 +18,7 @@ while position<len(msg):
 	else:
 		word=""
 	position+=1
-print("The word",findword,"appeared",counter,"times.")
+if counter==1:
+	print("The word",findword,"appeared",counter,"time.")
+else:
+	print("The word",findword,"appeared",counter,"times.")
