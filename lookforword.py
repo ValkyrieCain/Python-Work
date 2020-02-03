@@ -1,5 +1,5 @@
 msg=input("Enter a message: ")
-findword=input("Word to look for: ")
+findword=input("String to look for: ")
 word=""
 position=0
 counter=0
@@ -19,6 +19,6 @@ while position<len(msg):
 		word=""
 	position+=1
 if counter==1:
-	print("The word",findword,"appeared",counter,"time.")
+	print("The string",findword,"appeared",counter,"time.")
 else:
-	print("The word",findword,"appeared",counter,"times.")
+	print("The string",findword,"appeared",counter,"times.")
