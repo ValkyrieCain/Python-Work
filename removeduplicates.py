@@ -7,7 +7,7 @@ while pos<len(msg):
 		if word in final:
 			pass
 		else:
-			final=final+word+" "
+			final+=word+" "
 		word=""
 	else:
 		word+=msg[pos]
