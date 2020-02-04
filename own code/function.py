@@ -4,4 +4,5 @@ fun1()
 if fun1() == print("x"):
 	print ("OK")
 else:
-	fun1()=print("x")
+	def fun1():
+		print("x")
