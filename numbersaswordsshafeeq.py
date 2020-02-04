@@ -28,8 +28,8 @@ if number>=20:
 	answer+=tens(int(number/10))+" "
 	number=number%10
 if number<=19:
-	if answer=="":
-		print("Zero")
+	if number==0:
+		answer+="Zero"
 	else:
 		answer+=ones(number)
 print(answer)
