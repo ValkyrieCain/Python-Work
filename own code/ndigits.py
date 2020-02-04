@@ -1,4 +1,4 @@
-no=input("n digits ")
+no=input("Sum of digits: ")
 d={}
 length=len(no)
 var=1
