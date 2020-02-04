@@ -1,13 +1,13 @@
 msg=input("Enter a message: ")
 word=""
 final=""
-i=0
-while i<len(msg):
-	if msg[i]==" ":
+pos=0
+while pos<len(msg):
+	if msg[pos]==" ":
 		final=final+word+" "
 		word=""
 	else:
-		word=msg[i]+word
-	i+=1
+		word=msg[pos]+word
+	pos+=1
 final=final+word
 print(final)
