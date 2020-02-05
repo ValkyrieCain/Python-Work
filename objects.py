@@ -7,20 +7,19 @@ class Jam:
 		print(x.d)
 	def sy(x,a,b):
 		x.a=x.a+a+b
+		return(x.a)
 o1=Jam()
 o2=Jam()
 o3=Jam()
 print(o1)
 print(o2)
 print(o3)
-print(o1.a+o1.c)
-o1.c=(o1.d)-(o1.b)
 print(o1.c)
+o1.c=(o1.d)-(o1.b)
+print(o1.a+o1.c)
 o2.a=o1.c
 print(o1.a,o1.b,o1.c,o1.d,o2.a,o2.b,o2.c,o2.d,
 	o3.a,o3.b,o3.c,o3.d,"=",o1.a+o1.b+o1.c+o1.d+
 	o2.a+o2.b+o2.c+o2.d+o3.a+o3.b+o3.c+o3.d)
 o3.fun()
-print(o2.a)
-o2.sy(4,3)
-print(o2.a)
+print(o2.a,"+",4,"+",3,"=",o2.sy(4,3))
