@@ -12,14 +12,11 @@ answer=""
 if number==0:
 	answer+="Zero"
 if number>=10000:
-	if (int(number/1000))%10==0:
-		if int(number/10000)==1:
-			answer+="Ten Thousand "
-		else:
-			answer+=tens(int(number/10000))+" Thousand "
-	elif int(number/10000)==1:
+	if int(number/10000)==1:
 		answer+=ones(int(number/1000))+" Thousand "
 		number=number%1000
+	elif (int(number/1000))%10==0:
+		answer+=tens(int(number/10000))+" Thousand "
 	else:
 		answer+=tens(int(number/10000))+" "
 	number=number%10000
@@ -29,12 +26,13 @@ if number>=1000:
 if number>=100:
 	answer+=ones(int(number/100))+" Hundred "
 	number=number%100
-if number>=20:
-	answer+="and "+tens(int(number/10))+" "
-	number=number%10
-if number<=19:
-	if " and" in answer:
-		answer+=ones(number)
-	else:
-		answer+="and "+ones(number)
+if number!=0:
+	if number>=20:
+		answer+="and "+tens(int(number/10))+" "
+		number=number%10
+	if number<=19:
+		if " and" in answer:
+			answer+=ones(number)
+		else:
+			answer+="and "+ones(number)	
 print(answer)
