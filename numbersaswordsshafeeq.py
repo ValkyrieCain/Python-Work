@@ -24,23 +24,17 @@ if number>=10000:
 		answer+=tens(int(number/10000))+" "
 	number=number%10000
 if number>=1000:
-	if (int(number/100))%10==0:
-		if number%10==0 or (int(number/10))%10==0:
-			answer+=ones(int(number/1000))+" Thousand "
-		else:
-			answer+=ones(int(number/1000))+" Thousand and "
-	else:
-		answer+=ones(int(number/1000))+" Thousand "
+	answer+=ones(int(number/1000))+" Thousand "
 	number=number%1000
 if number>=100:
-	if number%100==0:
-		answer+=ones(int(number/100))+" Hundred"
-	else:
-		answer+=ones(int(number/100))+" Hundred and "
+	answer+=ones(int(number/100))+" Hundred "
 	number=number%100
 if number>=20:
-	answer+=tens(int(number/10))+" "
+	answer+="and "+tens(int(number/10))+" "
 	number=number%10
 if number<=19:
-	answer+=ones(number)
+	if " and" in answer:
+		answer+=ones(number)
+	else:
+		answer+="and "+ones(number)
 print(answer)
