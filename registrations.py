@@ -1,6 +1,5 @@
-repeat=True
 file=open("records.txt","a")
-while repeat==True:
+while True:
 	regno=input("Enter registration number: ")+","
 	name=input("Enter your name: ")+","
 	address=input("Enter your address: ")
@@ -13,9 +12,9 @@ while repeat==True:
 		print("Error: please use Y/N.")
 	again=input("Do you want to add another record? (Y/N) ")
 	if again=="y" or again=="Y":
-		repeat=True
+		pass
 	elif again=="n" or again=="N":
-		repeat=False
+		break
 	else:
 		print("Error: please use Y/N.")
-		repeat=False
+		break
