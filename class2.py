@@ -1,3 +1,3 @@
-import class1.py
-a=class1()
-print(a.a)
+import class1
+x=class1()
+print(x.a)
