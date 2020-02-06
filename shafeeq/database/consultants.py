@@ -1,6 +1,8 @@
 import pymysql as sql
 data1=sql.connect("localhost","root","","myfirstdatabase")
 cur=data1.cursor()
+user=functions()
+user.menu()
 class functions:
 	def menu(self):
 		user.lines()
@@ -156,5 +158,3 @@ class functions:
 			return file
 	def lines(self):
 		print("--------------------------------------------")
-user=functions()
-user.menu()
