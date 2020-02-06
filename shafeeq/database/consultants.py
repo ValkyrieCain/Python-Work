@@ -14,15 +14,15 @@ class functions:
 		interact=int(input("Please select an option: "))
 		if interact==1:
 			user.create()
-		if interact==2:
+		elif interact==2:
 			user.delete()
-		if interact==3:
+		elif interact==3:
 			user.view()
-		if interact==4:
+		elif interact==4:
 			user.update()
-		if interact==5:
-			a=1
-		if interact==6:
+		elif interact==5:
+			exit()
+		elif interact==6:
 			print("Oi, you can't do that!")
 			user.menu()
 		else:
@@ -48,9 +48,6 @@ class functions:
 			user.menu()
 	def delete(self):
 		regno=input("Enter registration number to delete: ")
-		if ord(regno)<48 or ord(regno)>57:
-			print("That's not a valid registration number.")
-			user.delete()
 		cur.execute("select * from consultants where regno="+regno)
 		user.show()
 		user.lines()
@@ -96,9 +93,6 @@ class functions:
 			user.view()
 	def update(self):
 		regno=input("Enter registration number to update: ")
-		if ord(regno)<48 or ord(regno)>57:
-			print("That's not a valid registration number.")
-			user.update()
 		cur.execute("select * from consultants where regno="+regno)
 		user.show()
 		user.lines()
