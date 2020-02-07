@@ -49,11 +49,11 @@ repeat=True
 while repeat==True:
 	print("------------------------------")
 	print("Functions:")
-	print("1 = create a blank file")
-	print("2 = insert into a file")
-	print("3 = find in a file")
-	print("4 = find and replace in a file")
-	print("5 = exit")
+	print("1 = Create a blank file")
+	print("2 = Insert into a file")
+	print("3 = Find in a file")
+	print("4 = Find and replace in a file")
+	print("5 = Exit")
 	print("------------------------------")
 	interact=int(input(""))
 	if interact==1:
