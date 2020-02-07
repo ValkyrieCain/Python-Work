@@ -30,18 +30,18 @@ class heroes:
 		selection=cur.fetchall()
 		for file in selection:
 			self.lines()
-			print("Registration Number:",file[0])
+			print("ID No:",file[0])
 			print("Publisher:",file[1])
 			print("Name:",file[2])
 			print("Powers:",file[3])
 			print("Teams:",file[4])
 			print("Sidekicks:",file[5])
-			print("Nemeses:",file[4])
+			print("Nemeses:",file[6])
 			
 	def create(self):
-		no=input("Registration Number: ")
+		no=input("ID No: ")
 		if len(self.unique(no))!=0:
-			print("Registration Number already in use. Please select another number.")
+			print("ID No already in use. Please select another number.")
 			self.create()
 			print((self.unique(no)))
 		else:
@@ -62,12 +62,13 @@ class heroes:
 		self.lines()
 		print("Options:")
 		print("1 = Show all heroes")
-		print("2 = Show all heroes with a specific registration number")
+		print("2 = Show all heroes from a specific publisher")
 		print("3 = Show all heroes with a specific name")
-		print("4 = Show all heroes from a specific publisher")
-		print("5 = Show all heroes from a specific client")
-		print("6 = Show all heroes with specific marks")
-		print("7 = Go back")
+		print("4 = Show all heroes with specific powers")
+		print("5 = Show all heroes in a specific team")
+		print("6 = Show all heroes with a specific sidekick")
+		print("7 = Show all heroes with a specific nemesis")
+		print("8 = Go back")
 		self.lines()
 		interact=int(input("Please select an option: "))
 		if interact==1:
@@ -75,8 +76,8 @@ class heroes:
 			self.show()
 			self.showagain()
 		if interact==2:
-			no=input("Which registration number would you like to see? ")
-			cur.execute("select * from superheroes where no="+no)
+			publisher=input("Which publisher would you like to see? ")
+			cur.execute("select * from superheroes where publisher={publisher.upper()}")
 			self.show()
 			self.showagain()
 		if interact==3:
@@ -85,8 +86,8 @@ class heroes:
 			self.show()
 			self.showagain()
 		if interact==4:
-			publisher=input("Which publisher would you like to see? ")
-			cur.execute("select * from superheroes where publisher='"+publisher.upper()+"'")
+			powers=input("What powers would you like to see? ")
+			cur.execute("select * from superheroes where power='"+powers.upper()+"'")
 			self.show()
 			self.showagain()
 		if interact==5:
@@ -143,7 +144,7 @@ class heroes:
 		cur.execute("select * from superheroes where no="+no)
 		self.show()
 		self.lines()
-		print("1 = Registration Number")
+		print("1 = ID No")
 		print("2 = Publisher")
 		print("3 = Name")
 		print("4 = Client")
