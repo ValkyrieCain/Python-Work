@@ -1,4 +1,6 @@
 import pymysql as sql
+import time
+import sys
 data1=sql.connect("localhost","root","","myfirstdatabase")
 cur=data1.cursor()
 class functions:
@@ -23,8 +25,7 @@ class functions:
 		elif interact==5:
 			exit()
 		elif interact==6:
-			print("Oi, you can't do that!")
-			user.menu()
+			user.secretmenu()
 		else:
 			print("That's not an option.")
 			user.menu()
@@ -52,10 +53,12 @@ class functions:
 		user.show()
 		user.lines()
 		sure=input("Are you sure you want to delete this record? (Y/N) ")
-		if sure=="Y":
+		if sure.upper()=="Y":
 			cur.execute("delete from consultants where regno="+regno)
 			data1.commit()
 			print("Record deleted.")
+		else:
+			print("Changes discarded.")
 		user.menu()
 	def view(self):
 		user.lines()
@@ -121,9 +124,8 @@ class functions:
 			elif field==5:
 				cur.execute("update consultants set marks='"+change.upper()+"' where regno="+regno)
 				user.updateagain()
-			else:
-				print("damn")
 		else:
+			print("Changes discarded.")
 			user.menu()
 	def show(self):
 		selection=cur.fetchall()
@@ -156,5 +158,34 @@ class functions:
 			return file
 	def lines(self):
 		print("--------------------------------------------")
+	def secretmenu(self):
+		user.lines()
+		print("Secret Menu:")
+		print("1 = Show hidden records")
+		print("2 = Delete all records")
+		print("3 = Crash system")
+		user.lines()
+		interact=int(input("Please select an option: "))
+		user.lines()
+		if interact==1:
+			#put something funny here?
+			print("Registration Number: ")
+			print("Name: ")
+			print("Group: ")
+			print("Client: ")
+			print("Marks: ")
+			user.menu()
+		if interact==2:			
+			print("All records deleted.")
+			exit()
+		if interact==3:
+			codes=input("Please enter nuclear detonation codes: ")
+			print("Processing...")
+			time.sleep(3)
+			#os.system('shutdown -s')
+			#could also make the cmd window close
+			#or make the computer bluescreen
+		else:
+			user.menu()
 user=functions()
 user.menu()
