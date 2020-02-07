@@ -6,3 +6,4 @@ if fun1() == print("x"):
 else:
 	def fun1():
 		print("x")
+print(2**3)
