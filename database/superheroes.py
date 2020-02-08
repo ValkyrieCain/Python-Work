@@ -6,21 +6,21 @@ class heroes:
 	def menu(self):
 		self.lines()
 		print("Main Menu:")
-		print("1 = Enter a new hero")
-		print("2 = Delete a hero")
-		print("3 = View a hero")
-		print("4 = Update a hero")
+		print("1 = View heroes")
+		print("2 = Enter a new hero")
+		print("3 = Update a hero")
+		print("4 = Delete a hero")
 		print("5 = Exit")
 		self.lines()
 		interact=int(input("Please select an option: "))
 		if interact==1:
-			self.create()
-		elif interact==2:
-			self.delete()
-		elif interact==3:
 			self.view()
-		elif interact==4:
+		elif interact==2:
+			self.create()
+		elif interact==3:
 			self.update()
+		elif interact==4:
+			self.delete()
 		elif interact==5:
 			exit()
 		else:
@@ -33,10 +33,11 @@ class heroes:
 			print("ID No:",file[0])
 			print("Publisher:",file[1])
 			print("Name:",file[2])
-			print("Powers:",file[3])
-			print("Teams:",file[4])
-			print("Sidekicks:",file[5])
-			print("Nemeses:",file[6])
+			print("Alter Ego:",file[3])
+			print("Powers:",file[4])
+			print("Team:",file[5])
+			print("Sidekick:",file[6])
+			print("Nemesis:",file[7])
 			
 	def create(self):
 		no=input("ID No: ")
@@ -46,13 +47,18 @@ class heroes:
 			print((self.unique(no)))
 		else:
 			print
+			publisher=input("Publisher: ")
 			name=input("Name: ")
-			publisher=input("publisher: ")
-			client=input("Client: ")
-			marks=input("Marks: ")
+			alterego=input("Alter Ego: ")
+			p1=input("Powers: ")
+			p2=input("Powers: ")
+			p3=input("Powers: ")
+			team=input("Team: ")
+			sidekick=input("Sidekick: ")
+			nemesis=input("Nemesis: ")
 			save=input("Save hero? (Y/N) ")
 			if "Y" in save.upper():
-				cur.execute("insert into superheroes values("+no+",'"+name.upper()+"','"+publisher.upper()+"','"+client.upper()+"',"+marks+")")
+				cur.execute("insert into superheroes values('publisher.upper()','name.upper()','alterego.upper()','p1.upper()','p2.upper()','p3.upper()','team.upper()','sidekick.upper()','nemesis.upper()'")
 				data1.commit()
 				print("Saved!")
 			else:
@@ -62,13 +68,14 @@ class heroes:
 		self.lines()
 		print("Options:")
 		print("1 = Show all heroes")
-		print("2 = Show all heroes from a specific publisher")
-		print("3 = Show all heroes with a specific name")
-		print("4 = Show all heroes with specific powers")
-		print("5 = Show all heroes in a specific team")
-		print("6 = Show all heroes with a specific sidekick")
-		print("7 = Show all heroes with a specific nemesis")
-		print("8 = Go back")
+		print("2 = Search by publisher")
+		print("3 = Search by name")
+		print("4 = Search by alter ego")
+		print("5 = Search by powers")
+		print("6 = Search by team")
+		print("7 = Search by sidekick")
+		print("8 = Search by nemesis")
+		print("9 = Go back")
 		self.lines()
 		interact=int(input("Please select an option: "))
 		if interact==1:
@@ -76,38 +83,48 @@ class heroes:
 			self.show()
 			self.showagain()
 		if interact==2:
-			publisher=input("Which publisher would you like to see? ")
+			publisher=input("Publisher: ")
 			cur.execute("select * from superheroes where publisher={publisher.upper()}")
 			self.show()
 			self.showagain()
 		if interact==3:
-			name=input("What name would you like to see? ")
+			name=input("Name: ")
 			cur.execute("select * from superheroes where name='"+name.upper()+"'")
 			self.show()
 			self.showagain()
 		if interact==4:
-			powers=input("What powers would you like to see? ")
-			cur.execute("select * from superheroes where power='"+powers.upper()+"'")
+			name=input("Alter Ego: ")
+			cur.execute("select * from superheroes where alterego='"+alterego.upper()+"'")
 			self.show()
 			self.showagain()
 		if interact==5:
-			client=input("Which client would you like to see? ")
-			cur.execute("select * from superheroes where client='"+client.upper()+"'")
+			powers=input("Power: ")
+			cur.execute("select * from superheroes where power='"+powers.upper()+"'")
 			self.show()
 			self.showagain()
 		if interact==6:
-			marks=input("What marks would you like to see? ")
-			cur.execute("select * from superheroes where marks="+marks)
+			client=input("Team: ")
+			cur.execute("select * from superheroes where team='"+client.upper()+"'")
 			self.show()
 			self.showagain()
 		if interact==7:
+			marks=input("Sidekick: ")
+			cur.execute("select * from superheroes where sidekick="+marks)
+			self.show()
+			self.showagain()
+		if interact==8:
+			marks=input("Nemesis: ")
+			cur.execute("select * from superheroes where nemesis="+marks)
+			self.show()
+			self.showagain()
+		if interact==9:
 			self.menu()
 		else:
 			print("That's not an option.")
 			self.view()
 	def showagain(self):
 		self.lines()
-		select=input("Would you like to see another hero? (Y/N) ")
+		select=input("Would you like to search again? (Y/N) ")
 		if select.upper()=="Y":
 			self.view()
 		else:
@@ -119,13 +136,13 @@ class heroes:
 	def lines(self):
 		print("--------------------------------------------")
 	def delete(self):
-		no=input("Enter registration number to delete: ")
-		cur.execute("select * from superheroes where no="+no)
+		name=input("Enter hero name to delete: ")
+		cur.execute("select * from superheroes where name="+name)
 		self.show()
 		self.lines()
 		sure=input("Are you sure you want to delete this hero? (Y/N) ")
 		if sure.upper()=="Y":
-			cur.execute("delete from superheroes where no="+no)
+			cur.execute("delete from superheroes where name="+name)
 			data1.commit()
 			print("Hero deleted.")
 		else:
@@ -140,30 +157,36 @@ class heroes:
 		else:
 			self.menu()
 	def update(self):
-		no=input("Enter registration number to update: ")
-		cur.execute("select * from superheroes where no="+no)
+		no=input("Enter hero name to update: ")
+		cur.execute("select * from superheroes where name="+name)
 		self.show()
 		self.lines()
-		print("1 = ID No")
-		print("2 = Publisher")
-		print("3 = Name")
-		print("4 = Client")
-		print("5 = Marks")
+		print("1 = Publisher")
+		print("2 = Name")
+		print("3 = Alter Ego:")
+		print("4 = Powers")
+		print("5 = Team")
+		print("6 = Sidekick")
+		print("7 = Nemesis")
 		self.lines()
 		field=int(input("What field would you like to change? "))
 		change=input("What would you like to change the field to? ")
 		sure=input("Are you sure you would like to change the field? (Y/N) ")
 		if sure.upper()=="Y":
 			if field==1:
-				cur.execute("update superheroes set no='"+change.upper()+"' where no="+no)
+				cur.execute("update superheroes set publisher='"+change.upper()+"' where no="+no)
 			elif field==2:
 				cur.execute("update superheroes set name='"+change.upper()+"' where no="+no)
 			elif field==3:
-				cur.execute("update superheroes set publisher='"+change.upper()+"' where no="+no)
+				cur.execute("update superheroes set alterego='"+change.upper()+"' where no="+no)
 			elif field==4:
-				cur.execute("update superheroes set client='"+change.upper()+"' where no="+no)
+				cur.execute("update superheroes set powers='"+change.upper()+"' where no="+no)
 			elif field==5:
-				cur.execute("update superheroes set marks='"+change.upper()+"' where no="+no)
+				cur.execute("update superheroes set team='"+change.upper()+"' where no="+no)
+			elif field==6:
+				cur.execute("update superheroes set sidekick='"+change.upper()+"' where no="+no)
+			elif field==7:
+				cur.execute("update superheroes set nemesis='"+change.upper()+"' where no="+no)
 			self.updateagain()
 		else:
 			print("Changes discarded.")
