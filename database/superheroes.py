@@ -1,6 +1,4 @@
 import pymysql as sql
-import time
-import sys
 data1=sql.connect("localhost","root","","valkyrie")
 cur=data1.cursor()
 class heroes:

@@ -6,7 +6,7 @@ from admin import admin
 data1=sql.connect("localhost","root","","valkyrie")
 cur=data1.cursor()
 password=input("Enter admin password: ")
-if password=="69":
+if password=="77":
 	admin=admin()
 	print("Logging in as admin...")
 	time.sleep(2)
