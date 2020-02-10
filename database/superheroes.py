@@ -185,10 +185,18 @@ class heroes:
 			print("Publisher:",file[0])
 			print("Name:",file[1])
 			print("Alter Ego:",file[2])
-			cur.execute(f"select power from powers where pid={file[3]} or pid={file[4]} or pid={file[5]}")
+			cur.execute(f"select power from powers where pid={file[3]}")
 			pwr=cur.fetchall()
 			for p in pwr:
-				print("Powers:",p[0])
+				print("First Power:",p[0])
+			cur.execute(f"select power from powers where pid={file[4]}")
+			pwr=cur.fetchall()
+			for p in pwr:
+				print("Second Power:",p[0])
+			cur.execute(f"select power from powers where pid={file[5]}")
+			pwr=cur.fetchall()
+			for p in pwr:
+				print("Third Power:",p[0])
 			print("Team:",file[6])
 			print("Sidekick:",file[7])
 			print("Nemesis:",file[8])
