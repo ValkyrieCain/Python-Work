@@ -1,5 +1,5 @@
 import pymysql as sql
-data1=sql.connect("localhost","root","","myfirstdatabase")
+data1=sql.connect("localhost","root","","valkyrie")
 cur=data1.cursor()
 class admin:
 	def menu(self):

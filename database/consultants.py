@@ -3,7 +3,7 @@ import time
 import sys
 from guest import guest
 from admin import admin
-data1=sql.connect("localhost","root","","myfirstdatabase")
+data1=sql.connect("localhost","root","","valkyrie")
 cur=data1.cursor()
 password=input("Enter admin password: ")
 if password=="69":

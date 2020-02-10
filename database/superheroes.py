@@ -1,7 +1,8 @@
 import pymysql as sql
 import time
 import sys
-data1=sql.connect("localhost","root","","myfirstdatabase")
+data1=sql.connect("localhost","root","","valkyrie")
+cur=data1.cursor()
 class heroes:
 	def menu(self):
 		self.lines()
@@ -38,15 +39,7 @@ class heroes:
 			print("Team:",file[5])
 			print("Sidekick:",file[6])
 			print("Nemesis:",file[7])
-			
 	def create(self):
-		no=input("ID No: ")
-		if len(self.unique(no))!=0:
-			print("ID No already in use. Please select another number.")
-			self.create()
-			print((self.unique(no)))
-		else:
-			print
 			publisher=input("Publisher: ")
 			name=input("Name: ")
 			alterego=input("Alter Ego: ")
@@ -58,7 +51,15 @@ class heroes:
 			nemesis=input("Nemesis: ")
 			save=input("Save hero? (Y/N) ")
 			if "Y" in save.upper():
-				cur.execute("insert into superheroes values('publisher.upper()','name.upper()','alterego.upper()','p1.upper()','p2.upper()','p3.upper()','team.upper()','sidekick.upper()','nemesis.upper()'")
+				if len(self.unique(p1))==0:
+					cur.execute(f"insert into powers values ((select max(pid) from powers)+1, "p1.upper()")")
+				if len(self.unique(p2))==0:					
+					cur.execute(f"insert into powers values ((select max(pid) from powers)+1, "p2.upper()")")
+				if len(self.unique(p3))==0:
+					cur.execute(f"insert into powers values ((select max(pid) from powers)+1, "p3.upper()")")
+				cur.execute(f"insert into superheroes values('{publisher.upper()}','{name.upper()}','"+alterego.upper()+
+					"','(select pid from powers where power='"+p1.upper()+"')','(select pid from powers where power='"+p2.upper()+
+					"')',(select pid from powers where power='"+p3.upper()+"'),'"+team.upper()+"','"+sidekick.upper()+"','"+nemesis.upper()+"')")
 				data1.commit()
 				print("Saved!")
 			else:
@@ -79,42 +80,44 @@ class heroes:
 		self.lines()
 		interact=int(input("Please select an option: "))
 		if interact==1:
-			cur.execute("select * from superheroes")
+			cur.execute(f"select * from superheroes")
 			self.show()
 			self.showagain()
 		if interact==2:
 			publisher=input("Publisher: ")
-			cur.execute("select * from superheroes where publisher={publisher.upper()}")
+			cur.execute(f"select * from superheroes where publisher={publisher.upper()}")
 			self.show()
 			self.showagain()
 		if interact==3:
 			name=input("Name: ")
-			cur.execute("select * from superheroes where name='"+name.upper()+"'")
+			cur.execute(f"select * from superheroes where name='{name.upper()}'")
 			self.show()
 			self.showagain()
 		if interact==4:
-			name=input("Alter Ego: ")
-			cur.execute("select * from superheroes where alterego='"+alterego.upper()+"'")
+			alterego=input("Alter Ego: ")
+			cur.execute(f"select * from superheroes where alterego='{alterego.upper()}'")
 			self.show()
 			self.showagain()
 		if interact==5:
 			powers=input("Power: ")
-			cur.execute("select * from superheroes where power='"+powers.upper()+"'")
+			cur.execute(f"select * from superheroes where power1=(select pid from powers where power1='"+powers.upper()+
+				"') or power2=(select pid from powers where power='"+powers.upper()+
+				"') or power3=(select pid from powers where power='"+powers.upper()+"')")
 			self.show()
 			self.showagain()
 		if interact==6:
-			client=input("Team: ")
-			cur.execute("select * from superheroes where team='"+client.upper()+"'")
+			team=input("Team: ")
+			cur.execute(f"select * from superheroes where team='{team.upper()}'")
 			self.show()
 			self.showagain()
 		if interact==7:
-			marks=input("Sidekick: ")
-			cur.execute("select * from superheroes where sidekick="+marks)
+			sidekick=input("Sidekick: ")
+			cur.execute(f"select * from superheroes where sidekick={sidekick.upper()}")
 			self.show()
 			self.showagain()
 		if interact==8:
-			marks=input("Nemesis: ")
-			cur.execute("select * from superheroes where nemesis="+marks)
+			nemesis=input("Nemesis: ")
+			cur.execute(f"select * from superheroes where nemesis={nemesis.upper()}")
 			self.show()
 			self.showagain()
 		if interact==9:
@@ -130,19 +133,19 @@ class heroes:
 		else:
 			self.menu()
 	def unique(self,x):
-		cur.execute("select no from superheroes where no="+x)
+		cur.execute(f"select pid from powers where power='{power.upper()}'")
 		selection=cur.fetchall()
 		return selection
 	def lines(self):
 		print("--------------------------------------------")
 	def delete(self):
 		name=input("Enter hero name to delete: ")
-		cur.execute("select * from superheroes where name="+name)
+		cur.execute(f"select * from superheroes where name={name}")
 		self.show()
 		self.lines()
 		sure=input("Are you sure you want to delete this hero? (Y/N) ")
 		if sure.upper()=="Y":
-			cur.execute("delete from superheroes where name="+name)
+			cur.execute(f"delete from superheroes where name={name}")
 			data1.commit()
 			print("Hero deleted.")
 		else:
@@ -158,7 +161,7 @@ class heroes:
 			self.menu()
 	def update(self):
 		no=input("Enter hero name to update: ")
-		cur.execute("select * from superheroes where name="+name)
+		cur.execute(f"select * from superheroes where name={name}")
 		self.show()
 		self.lines()
 		print("1 = Publisher")
@@ -174,19 +177,19 @@ class heroes:
 		sure=input("Are you sure you would like to change the field? (Y/N) ")
 		if sure.upper()=="Y":
 			if field==1:
-				cur.execute("update superheroes set publisher='"+change.upper()+"' where no="+no)
+				cur.execute(f"update superheroes set publisher='{change.upper()}' where no={no}")
 			elif field==2:
-				cur.execute("update superheroes set name='"+change.upper()+"' where no="+no)
+				cur.execute(f"update superheroes set name='{change.upper()}' where no={no}")
 			elif field==3:
-				cur.execute("update superheroes set alterego='"+change.upper()+"' where no="+no)
+				cur.execute(f"update superheroes set alterego='{change.upper()}' where no={no}")
 			elif field==4:
-				cur.execute("update superheroes set powers='"+change.upper()+"' where no="+no)
+				cur.execute(f"update superheroes set powers='{change.upper()}' where no={no}")
 			elif field==5:
-				cur.execute("update superheroes set team='"+change.upper()+"' where no="+no)
+				cur.execute(f"update superheroes set team='{change.upper()}' where no={no}")
 			elif field==6:
-				cur.execute("update superheroes set sidekick='"+change.upper()+"' where no="+no)
+				cur.execute(f"update superheroes set sidekick='{change.upper()}' where no={no}")
 			elif field==7:
-				cur.execute("update superheroes set nemesis='"+change.upper()+"' where no="+no)
+				cur.execute(f"update superheroes set nemesis='{change.upper()}' where no={no}")
 			self.updateagain()
 		else:
 			print("Changes discarded.")
