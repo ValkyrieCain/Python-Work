@@ -1,2 +1,2 @@
 1, The Shafeeq, Manchester
-12, Valkyrie, London4, 2, 4
+12, Valkyrie, London
